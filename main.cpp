@@ -8,4 +8,25 @@ struct Node {
   Node(int v) : value{v}, left{nullptr}, right{nullptr} {}
 };
 
-int main() { return 0; }
+class BST {
+private:
+  Node *m_root;
+
+  void deleteNode(Node *node) {
+    if (node == nullptr) {
+      return;
+    }
+    delete (node->left);
+    delete (node->right);
+    delete node;
+  }
+
+public:
+  BST() : m_root{nullptr} {}
+  ~BST() { deleteNode(m_root); }
+};
+
+int main() {
+  std::cout << "HelloWorld";
+  return 0;
+}
