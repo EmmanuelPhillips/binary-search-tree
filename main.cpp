@@ -21,12 +21,52 @@ private:
     delete node;
   }
 
+  void printInOrder(Node *node) {
+    if (node == nullptr) {
+      return;
+    }
+    printInOrder(node->left);
+    std::cout << node->value << ' ';
+    printInOrder(node->right);
+  }
+
 public:
   BST() : m_root{nullptr} {}
   ~BST() { deleteNode(m_root); }
+
+  void printInOrder() { printInOrder(m_root); }
+
+  void insert(int value) {
+    Node *temp = new Node(value);
+    if (m_root == nullptr) {
+      m_root = temp;
+      return;
+    }
+    Node *current = m_root;
+    while (true) {
+      if (value > current->value) {
+        if (current->right == nullptr) {
+          current->right = temp;
+          return;
+        } else {
+          current = current->right;
+        }
+      } else if (value < current->value) {
+        if (current->left == nullptr) {
+          current->left = temp;
+          return;
+        } else {
+          current = current->left;
+        }
+      } else {
+        std::cout << "Node with value already exists.\n";
+        return;
+      }
+    }
+  }
 };
 
 int main() {
-  std::cout << "HelloWorld";
+  BST bst{};
   return 0;
 }
