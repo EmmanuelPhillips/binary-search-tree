@@ -182,5 +182,81 @@ public:
 
 int main() {
   BST bst{};
+
+  std::cout << "=== Empty tree ===\n";
+  bst.printInOrder();
+  std::cout << "(no output)\n";
+  std::cout << "Height: " << bst.getHeight() << '\n';
+  bst.getMin();
+  bst.getMax();
+  bst.remove(5);
+  std::cout << "Contains 5: " << bst.contains(5) << '\n';
+
+  std::cout << "\n=== Single node (root = 10) ===\n";
+  bst.insert(10);
+  std::cout << "Height: " << bst.getHeight() << '\n';
+  std::cout << "Min: " << bst.getMin().value() << '\n';
+  std::cout << "Max: " << bst.getMax().value() << '\n';
+  std::cout << "Contains 10: " << bst.contains(10) << '\n';
+  bst.printInOrder();
+  std::cout << '\n';
+
+  std::cout << "\n=== Duplicate insert ===\n";
+  bst.insert(10);
+
+  std::cout << "\n=== Build tree ===\n";
+  bst.insert(5);
+  bst.insert(20);
+  bst.insert(2);
+  bst.insert(7);
+  bst.insert(30);
+  bst.printInOrder();
+  std::cout << '\n';
+  std::cout << "Height: " << bst.getHeight() << '\n';
+  std::cout << "Min: " << bst.getMin().value() << '\n';
+  std::cout << "Max: " << bst.getMax().value() << '\n';
+
+  std::cout << "\n=== Contains ===\n";
+  std::cout << "Contains 7: " << bst.contains(7) << '\n';
+  std::cout << "Contains 99: " << bst.contains(99) << '\n';
+
+  std::cout << "\n=== Remove leaf (2) ===\n";
+  bst.remove(2);
+  bst.printInOrder();
+  std::cout << '\n';
+
+  std::cout << "\n=== Remove node with one child (5) ===\n";
+  bst.remove(5);
+  bst.printInOrder();
+  std::cout << '\n';
+
+  bst.insert(5);
+  bst.insert(6);
+
+  std::cout << "\n=== Remove node with two children (7) ===\n";
+  bst.remove(7);
+  bst.printInOrder();
+  std::cout << '\n';
+
+  std::cout << "\n=== Remove root (10) ===\n";
+  bst.remove(10);
+  bst.printInOrder();
+  std::cout << '\n';
+
+  std::cout << "\n=== Remove absent value ===\n";
+  bst.remove(99);
+
+  std::cout << "\n=== Remove down to one node then remove root ===\n";
+  bst.remove(5);
+  bst.remove(6);
+  bst.remove(30);
+  bst.printInOrder();
+  std::cout << '\n';
+  bst.remove(20);
+  bst.printInOrder();
+  std::cout << "(empty)\n";
+  std::cout << "Height: " << bst.getHeight() << '\n';
+  bst.getMin();
+
   return 0;
 }
