@@ -130,6 +130,20 @@ public:
     }
     std::cout << "Can't remove value that is not in BST.\n";
   }
+
+  bool contains(int value) {
+    Node *current = m_root;
+    while (current != nullptr) {
+      if (value == current->value) {
+        return true;
+      } else if (value > current->value) {
+        current = current->right;
+      } else {
+        current = current->left;
+      }
+    }
+    return false;
+  }
 };
 
 int main() {
