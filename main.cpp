@@ -1,4 +1,5 @@
 #include <iostream>
+#include <optional>
 
 struct Node {
   int value;
@@ -30,11 +31,44 @@ private:
     printInOrder(node->right);
   }
 
+  int getHeight(Node *node) const {
+    if (node == nullptr) {
+      return 0;
+    }
+    return 1 + std::max(getHeight(node->left), getHeight(node->right));
+  }
+
 public:
   BST() : m_root{nullptr} {}
   ~BST() { deleteNode(m_root); }
 
   void printInOrder() { printInOrder(m_root); }
+
+  int getHeight() const { return getHeight(m_root); }
+
+  std::optional<int> getMin() const {
+    if (m_root == nullptr) {
+      std::cout << "Empty BST.\n";
+      return std::nullopt;
+    }
+    Node *min = m_root;
+    while (min->left != nullptr) {
+      min = min->left;
+    }
+    return min->value;
+  }
+
+  std::optional<int> getMax() const {
+    if (m_root == nullptr) {
+      std::cout << "Empty BST.\n";
+      return std::nullopt;
+    }
+    Node *max = m_root;
+    while (max->right != nullptr) {
+      max = max->right;
+    }
+    return max->value;
+  }
 
   void insert(int value) {
     Node *temp = new Node(value);
